@@ -3,33 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pulse OS • Fixing Your Pulses</title>
+    <title>PulseOS • Fixing Your Meetings</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-
     <style>
         :root {
-            --pulse-blue:   #4a90e2;
+            --pulse-blue: #4a90e2;
             --pulse-yellow: #f5c94c;
             --pulse-orange: #e67e52;
-            --cream:        #f8f1e9;
+            --cream: #f8f1e9;
         }
-
         body {
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
             background: #0f0f0f;
             color: #e0e0e0;
             line-height: 1.6;
         }
-
         h1, h2, h3 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             letter-spacing: 0.05em;
         }
-
         .stripe-bar {
             background: linear-gradient(
                 to bottom,
@@ -38,32 +34,21 @@
                 var(--pulse-orange) 66.666%
             );
         }
-
         .slide {
             scroll-snap-align: start;
             scroll-snap-stop: always;
         }
-
         .section-title {
             font-size: clamp(2.25rem, 8vw, 3.75rem);
             line-height: 1.05;
             font-weight: 900;
         }
-
-        .nav-link {
-            transition: color 0.2s ease;
+        .stat-number {
+            font-size: clamp(3rem, 12vw, 5.5rem);
+            font-weight: 900;
+            color: var(--pulse-yellow);
+            line-height: 0.9;
         }
-
-        /* Mobile-first Tailwind tweaks */
-        @media (max-width: 640px) {
-            .hero-text {
-                font-size: clamp(2.25rem, 9vw, 3rem);
-            }
-            .stat-number {
-                font-size: clamp(3rem, 12vw, 5rem);
-            }
-        }
-
         .cta-button {
             background: var(--pulse-orange);
             color: #111;
@@ -71,13 +56,30 @@
             letter-spacing: 0.1em;
             transition: all 0.2s ease;
         }
-
         .cta-button:hover {
             background: #ff8c5a;
             transform: translateY(-2px);
         }
-
-        /* Smooth scrolling */
+        /* Mobile menu */
+        #mobile-menu {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Extra breathing room on mobile */
+        @media (max-width: 768px) {
+            section {
+                padding-top: 4.5rem !important;
+                padding-bottom: 4.5rem !important;
+            }
+            .section-divider {
+                height: 1px;
+                background: linear-gradient(to right, transparent, #4a4a4a 20%, #4a4a4a 80%, transparent);
+                margin: 3rem 0;
+            }
+        }
         html {
             scroll-behavior: smooth;
         }
@@ -85,71 +87,71 @@
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <!-- MOBILE-FRIENDLY NAV -->
+    <!-- FIXED NAV – MOBILE OPTIMIZED -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div class="w-7 h-12 stripe-bar rounded-sm flex-shrink-0"></div>
-                <div class="text-2xl font-bold tracking-tight text-white">PulseOS</div>
+                <div class="w-8 h-14 stripe-bar rounded flex-shrink-0"></div>
+                <div class="text-3xl font-bold tracking-tight text-white">PulseOS</div>
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-wider text-gray-400">
-                <a href="#problem" class="nav-link hover:text-white">Problem</a>
-                <a href="#shift" class="nav-link hover:text-white">The Shift</a>
-                <a href="#lifecycle" class="nav-link hover:text-white">Lifecycle</a>
-                <a href="#types" class="nav-link hover:text-white">Pulse Types</a>
-                <a href="#roi" class="nav-link hover:text-white">ROI</a>
+            <div class="hidden md:flex items-center gap-9 text-sm uppercase tracking-wider text-gray-400">
+                <a href="#problem" class="hover:text-white transition-colors">Problem</a>
+                <a href="#shift" class="hover:text-white transition-colors">The Shift</a>
+                <a href="#lifecycle" class="hover:text-white transition-colors">Lifecycle</a>
+                <a href="#types" class="hover:text-white transition-colors">Pulse Types</a>
+                <a href="#roi" class="hover:text-white transition-colors">ROI</a>
             </div>
 
-            <!-- Mobile Hamburger -->
-            <button id="mobile-menu-btn"
-                    class="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center">
-                <span class="block w-6 h-px bg-white"></span>
-                <span class="block w-6 h-px bg-white"></span>
-                <span class="block w-6 h-px bg-white"></span>
-            </button>
+            <!-- Mobile Tagline (shortened) + Hamburger -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:block text-[10px] uppercase bg-gray-900 text-gray-400 px-3 py-1 rounded">Time has moved on</div>
+                <button id="mobile-menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
+                    <span class="block w-6 h-px bg-white transition-all"></span>
+                    <span class="block w-6 h-px bg-white transition-all"></span>
+                    <span class="block w-6 h-px bg-white transition-all"></span>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Full-Screen Menu -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-black z-50 flex flex-col items-center justify-center gap-8 text-2xl">
-            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-4xl text-gray-400">✕</button>
-            <a href="#problem" onclick="toggleMobileMenu()" class="nav-link">The Problem</a>
-            <a href="#shift" onclick="toggleMobileMenu()" class="nav-link">The Shift</a>
-            <a href="#lifecycle" onclick="toggleMobileMenu()" class="nav-link">Pulse Lifecycle</a>
-            <a href="#types" onclick="toggleMobileMenu()" class="nav-link">Pulse Types</a>
-            <a href="#roi" onclick="toggleMobileMenu()" class="nav-link">ROI Evidence</a>
-            <a href="#cta" onclick="toggleMobileMenu()" class="nav-link">Get Started</a>
+        <!-- MOBILE FULL-SCREEN MENU -->
+        <div id="mobile-menu" class="hidden fixed inset-0 bg-black z-[60] flex flex-col items-center justify-center gap-10 text-3xl font-light">
+            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-5xl text-gray-400">✕</button>
+            <a href="#problem" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">The Problem</a>
+            <a href="#shift" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">The Shift</a>
+            <a href="#lifecycle" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">Lifecycle</a>
+            <a href="#types" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">Pulse Types</a>
+            <a href="#roi" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">ROI</a>
+            <a href="#cta" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">Get Started</a>
         </div>
     </nav>
 
     <!-- HERO -->
-    <section id="hero" class="min-h-screen flex items-center pt-20 md:pt-24 slide">
+    <section class="min-h-screen flex items-center pt-20 md:pt-24 slide">
         <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
                 <div class="md:col-span-7">
-                    <div class="text-xs uppercase tracking-[3px] text-gray-500 mb-4">March 2026 Baseline</div>
-                    <h1 class="section-title hero-text text-white mb-8 leading-none">
-                        Ever feel like<br>your meetings<br>are stuck in<br>the past?
+                    <div class="text-xs md:text-sm uppercase tracking-widest text-gray-500 mb-6">Bring your business into the present</div>
+                    <h1 class="section-title text-white mb-10 leading-none">
+                        Ever feel like<br>your meetings<br>are stuck in<br>the 80's?
                     </h1>
-                    <p class="text-xl md:text-2xl text-gray-300 max-w-xl mb-10">
-                        It’s time to replace meetings with <span class="font-semibold text-white">Pulses</span> — structured, outcome-driven collaboration events that become the heartbeat of your organisation.
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-12">
+                        It’s time to replace meetings with <span class="text-white font-semibold">Pulses</span> — structured, outcome-focused collaboration events that become the heartbeat of high-performance teams.
                     </p>
                     <button onclick="document.getElementById('problem').scrollIntoView({behavior:'smooth'})"
-                            class="cta-button px-9 py-5 md:px-12 md:py-6 text-lg md:text-xl uppercase tracking-wider rounded w-full md:w-auto">
+                            class="cta-button px-8 py-5 md:px-10 md:py-6 text-lg md:text-xl uppercase tracking-wider rounded w-full md:w-auto">
                         Enter the Pulse →
                     </button>
                 </div>
-
-                <!-- Logo Block -->
-                <div class="md:col-span-5 flex justify-center md:justify-end mt-8 md:mt-0">
-                    <div class="flex items-center gap-5 md:gap-7">
-                        <div class="w-9 md:w-12 h-16 md:h-24 stripe-bar rounded shadow-md flex-shrink-0"></div>
+                <div class="md:col-span-5 flex justify-center md:justify-end mt-10 md:mt-0">
+                    <div class="flex items-center gap-6">
+                        <div class="w-9 md:w-10 h-16 md:h-20 stripe-bar rounded shadow-md flex-shrink-0"></div>
                         <div class="text-center md:text-right">
-                            <div class="text-6xl md:text-7xl font-black tracking-tighter text-white">PulseOS</div>
-                            <div class="h-1 bg-gray-700 my-3 w-40 mx-auto md:mx-0"></div>
-                            <div class="text-base md:text-lg tracking-widest text-gray-400">FIXING YOUR PULSES</div>
+                            <div class="text-6xl md:text-8xl font-black tracking-tighter text-white">PulseOS</div>
+                            <div class="h-1 bg-gray-600 my-3 w-40 mx-auto md:mx-0"></div>
+                            <div class="text-lg md:text-xl tracking-widest text-gray-400">Making Meetings Work</div>
                         </div>
                     </div>
                 </div>
@@ -158,87 +160,234 @@
     </section>
 
     <!-- PROBLEM -->
-    <section id="problem" class="min-h-screen flex items-center py-20 md:py-24 slide bg-gradient-to-b from-black to-gray-950">
+    <section id="problem" class="min-h-screen flex items-center py-16 md:py-24 slide bg-gradient-to-b from-black to-gray-950">
         <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="grid md:grid-cols-12 gap-12 md:gap-16">
+            <div class="grid md:grid-cols-12 gap-12">
                 <div class="md:col-span-5">
                     <div class="sticky top-28">
-                        <div class="text-xs uppercase tracking-widest text-gray-500">UK 2024 BENCHMARK</div>
-                        <h2 class="section-title text-white mt-3">Meetings are broken.</h2>
+                        <div class="text-xs uppercase tracking-widest text-gray-500">Your Reality</div>
+                        <h2 class="section-title text-white mt-4">Meetings are broken.</h2>
                     </div>
                 </div>
-
-                <div class="md:col-span-7 space-y-10 md:space-y-12">
+                <div class="md:col-span-7 space-y-10">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="bg-gray-900/60 p-8 rounded border border-gray-800">
-                            <div class="stat-number text-6xl md:text-7xl font-black text-[#f5c94c]">35%</div>
-                            <p class="mt-4 text-lg text-gray-300">of all meetings are outright unproductive</p>
+                            <div class="stat-number">35%</div>
+                            <p class="mt-4 text-gray-300">of meetings are outright unproductive</p>
                             <div class="text-xs text-gray-500 mt-6">LSE / Protiviti 2024</div>
                         </div>
                         <div class="bg-gray-900/60 p-8 rounded border border-gray-800">
-                            <div class="stat-number text-6xl md:text-7xl font-black text-[#f5c94c]">£50B</div>
-                            <p class="mt-4 text-lg text-gray-300">lost annually across the UK economy</p>
+                            <div class="stat-number">£50B</div>
+                            <p class="mt-4 text-gray-300">lost annually to unproductive meetings in the UK</p>
                         </div>
                     </div>
-
-                    <div class="bg-gray-900/60 p-8 rounded border border-gray-800">
+                    <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-gray-800">
                         <div class="text-5xl md:text-6xl font-bold text-white">208 hours</div>
-                        <p class="mt-4 text-xl text-gray-300">
-                            Average UK knowledge worker spends in meetings every year — 73 hours completely wasted (≈ 9 working days)
+                        <p class="text-xl mt-4 text-gray-300">
+                            The amount the average UK knowledge worker spends in meetings per year — 73 hours completely wasted (≈ 9 working days)
                         </p>
                     </div>
-
-                    <div class="text-gray-300 text-lg space-y-3">
-                        <p>• 78% say meetings make it hard to get actual work done</p>
+                    <div class="space-y-4 text-gray-300 text-lg">
+                        <p>• 78% say meetings prevent real work</p>
                         <p>• 76% feel drained after heavy meeting days</p>
-                        <p>• 60% of workday consumed by meetings &amp; comms</p>
+                        <p>• 60% of the workday consumed by meetings &amp; comms</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="section-divider mx-6 md:hidden"></div>
     </section>
 
     <!-- THE SHIFT -->
-    <section id="shift" class="min-h-screen flex items-center py-20 md:py-24 slide">
+    <section id="shift" class="min-h-screen flex items-center py-16 md:py-24 slide">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="uppercase text-xs tracking-widest text-gray-500 mb-6">Goodbye Meetings</div>
+            <div class="text-xl uppercase tracking-widest text-gray-500 mb-4">Goodbye Meetings</div>
             <h2 class="section-title text-white mb-10">Long live the Pulse</h2>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-                Pulse OS replaces chaotic “meetings” with disciplined, outcome-driven <span class="font-semibold text-white">Pulses</span> — the rhythmic heartbeat of a high-performance Microsoft 365 organisation.
+            <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Pulse OS replaces chaotic “meetings” with disciplined, outcome-driven <strong class="text-white">Pulses</strong> — the rhythmic heartbeat of a high-performance Microsoft 365 organisation.
             </p>
-
             <div class="my-16 md:my-20 flex justify-center">
-                <div class="flex items-center gap-6 scale-90 md:scale-100">
-                    <div class="w-10 h-20 stripe-bar rounded shadow"></div>
+                <div class="flex items-center gap-8 scale-90 md:scale-100">
+                    <div class="w-12 h-20 stripe-bar rounded shadow"></div>
                     <div>
-                        <div class="text-6xl md:text-8xl font-black tracking-tighter text-white">PulseOS</div>
-                        <div class="h-1 bg-gray-700 my-4 w-52"></div>
-                        <div class="text-lg tracking-widest text-gray-400">POWERED BY MICROSOFT 365</div>
+                        <div class="text-7xl md:text-8xl font-black text-white tracking-tight">PulseOS</div>
+                        <div class="h-1.5 bg-gray-700 my-4"></div>
+                        <div class="text-xl md:text-2xl tracking-widest text-gray-400">POWERED BY YOU, ENFORCED BY TECHNOLOGY</div>
                     </div>
                 </div>
             </div>
-
-            <div class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
+            <div class="text-lg text-gray-400 max-w-2xl mx-auto">
                 100% native Microsoft 365 • AI-enforced structure • Full cultural &amp; certification protocol • No third-party tools
             </div>
         </div>
+        <div class="section-divider mx-6 md:hidden"></div>
     </section>
 
     <!-- LIFECYCLE -->
-    <section id="lifecycle" class="min-h-screen flex items-center py-20 md:py-24 slide bg-gradient-to-b from-gray-950 to-black">
+    <section id="lifecycle" class="min-h-screen flex items-center py-16 md:py-24 slide bg-gradient-to-b from-gray-950 to-black">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="section-title text-center text-white mb-12">The Pulse Lifecycle</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-gray-800">
-                    <div class="uppercase text-[#4a90e2] text-sm tracking-wider mb-6">Pre-Pulse</div>
-                    <ul class="space-y-5 text-gray-300 text-base">
-                        <li>Copilot-enforced agenda drafting</li>
-                        <li>Personalised pre-reads &amp; readiness scoring</li>
-                        <li>Smart scheduling with focus-time protection</li>
+                    <div class="text-lg uppercase tracking-wider text-blue-400 mb-6">Pre-Pulse</div>
+                    <ul class="space-y-5 text-gray-300">
+                        <li>Copilot-enforced agenda</li>
+                        <li>Personalised pre-reads</li>
+                        <li>Focus-time protected scheduling</li>
                     </ul>
                 </div>
-                <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-[#f5c94c]/30">
-                    <div class="uppercase text-[#f5c94c] text-sm tracking-wider mb-6">During Pulse</div>
-                    <ul class="space-y-5 text-gray-300 text-base">
-                        <li>Teams Facilitator agent with live timers &amp; prompts</li>
-                       
+                <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-yellow-500/30">
+                    <div class="text-lg uppercase tracking-wider text-yellow-400 mb-6">During Pulse</div>
+                    <ul class="space-y-5 text-gray-300">
+                        <li>Teams Facilitator agent</li>
+                        <li>Real-time Loop notes</li>
+                        <li>Live task extraction</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-orange-500/30">
+                    <div class="text-lg uppercase tracking-wider text-orange-400 mb-6">Post-Pulse</div>
+                    <ul class="space-y-5 text-gray-300">
+                        <li>Auto-recap &amp; summaries</li>
+                        <li>Actions → Planner sync</li>
+                        <li>ROTI + outcome scoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider mx-6 md:hidden"></div>
+    </section>
+
+    <!-- PULSE TYPES -->
+    <section id="types" class="min-h-screen flex items-center py-16 md:py-24 slide bg-gradient-to-b from-black to-gray-950">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <h2 class="section-title text-center text-white mb-10">Choose Your Pulse Type</h2>
+            <p class="text-xl text-gray-300 text-center max-w-4xl mx-auto mb-12">
+                Pulse OS standardises collaboration into focused, outcome-driven events — replacing ad-hoc or poorly structured sessions with clear purpose and boundaries.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-blue-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Tactical Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">Weekly • 30–50 min</div>
+                    <p class="text-gray-300">Quick alignment, scorecard review, and focused problem-solving (Identify, Discuss, Solve) on top issues.</p>
+                </div>
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-yellow-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Strategic Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">Monthly • 90–120 min</div>
+                    <p class="text-gray-300">Deep-dive decision making with structured pre-reads and discussion.</p>
+                </div>
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-orange-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Retro Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">Monthly</div>
+                    <p class="text-gray-300">Health review and process adaptation to continuously improve collaboration.</p>
+                </div>
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-blue-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Innovation Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">As needed</div>
+                    <p class="text-gray-300">Problem-solving and brainstorming in a structured format.</p>
+                </div>
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-yellow-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Decision Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">As needed • Max 60 min • 5–7 attendees</div>
+                    <p class="text-gray-300">Focused decision-making forum with clear roles and process.</p>
+                </div>
+                <div class="bg-gray-900/60 p-8 rounded border border-gray-800 hover:border-orange-500/50 transition-colors">
+                    <div class="text-xl font-bold text-white mb-2">Alignment Pulse</div>
+                    <div class="text-sm text-gray-500 uppercase tracking-wider mb-4">As needed</div>
+                    <p class="text-gray-300">Cross-team coordination and information sharing (no decisions).</p>
+                </div>
+            </div>
+            <div class="mt-16 text-center text-sm text-gray-500">
+                Structured typologies help enforce agendas, clarity, and inclusion — key drivers of meeting effectiveness.
+            </div>
+        </div>
+        <div class="section-divider mx-6 md:hidden"></div>
+    </section>
+
+    <!-- ROI -->
+    <section id="roi" class="min-h-screen flex items-center py-16 md:py-24 slide">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-5">
+                    <h2 class="section-title text-white">The ROI of Structured Pulses</h2>
+                    <p class="text-xl text-gray-300 mt-6">
+                        UK firms lose £50 billion annually to unproductive meetings (35% of all meetings deemed unproductive — LSE/Protiviti 2024 study).
+                    </p>
+                </div>
+                <div class="md:col-span-7 space-y-12">
+                    <div class="bg-gray-900/60 p-8 md:p-10 rounded border border-gray-800">
+                        <div class="text-6xl font-black text-yellow-400">£50 billion</div>
+                        <p class="text-xl text-gray-300 mt-4">
+                            Annual UK cost of unproductive meetings (LSE/Protiviti 2024 global survey of 3,400+ professionals).
+                        </p>
+                        <div class="text-xs text-gray-500 mt-6">
+                            Source: London School of Economics / Protiviti — "When Generations Meet" report.
+                        </div>
+                    </div>
+                    <div class="space-y-8 text-lg text-gray-300">
+                        <div>
+                            <div class="text-4xl font-bold text-white mb-3">35% unproductive</div>
+                            <p>Across generations, 35% of meetings are considered unproductive due to poor structure, lack of inclusion, unclear goals, and process issues.</p>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-white mb-3">Potential reductions</div>
+                            <ul class="list-disc pl-6 space-y-3 mt-4">
+                                <li>Achieving better generational representation and inclusion could reduce unproductive meetings from 35% to 29% — saving an estimated £10 billion annually in the UK.</li>
+                                <li>Implementing inclusive behaviours (valuing contributions, leveraging insights, openness to ideas) could drop the rate to 15% — saving up to £29 billion annually in the UK.</li>
+                            </ul>
+                            <div class="text-xs text-gray-500 mt-6">
+                                LSE/Protiviti 2024 — based on structured, facilitated, and inclusive meeting practices.
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-white mb-3">Broader productivity gains</div>
+                            <p class="mt-4">
+                                Studies on structured meetings (agendas, facilitation, clear objectives) show improved effectiveness, reduced time waste, higher engagement, and better outcomes — directly addressing root causes like lack of agenda, unclear goals, and poor follow-up.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500 text-center">
+                        Pulse OS builds on Microsoft 365-native AI enforcement + proven protocol to drive these structured improvements — turning costly chaos into measurable heartbeat efficiency.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="cta" class="min-h-screen flex items-center py-16 md:py-24 slide">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="section-title text-white mb-12">
+                Ready to replace meetings<br>with disciplined Pulses?
+            </h2>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                    class="cta-button px-12 py-7 text-xl md:text-2xl uppercase tracking-wider rounded w-full max-w-md mx-auto block">
+                Begin Your PulseOS Transformation
+            </button>
+            <div class="mt-12 text-xs md:text-sm text-gray-500">
+                For UK Microsoft 365 E3/E5 organisations • Selective Copilot licensing • UK data residency
+            </div>
+            <div class="mt-20 opacity-70 flex justify-center gap-6">
+                <div class="w-8 h-14 stripe-bar rounded"></div>
+                <div class="text-4xl font-bold text-white">PulseOS</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close mobile menu on outside click or escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) menu.classList.add('hidden');
+            }
+        });
+
+        // Auto-close mobile menu when clicking a link (already handled in onclick)
+    </script>
+</body>
+</html>
