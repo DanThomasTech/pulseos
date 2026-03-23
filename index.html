@@ -13,7 +13,6 @@
             --pulse-blue: #4a90e2;
             --pulse-yellow: #f5c94c;
             --pulse-orange: #e67e52;
-            --cream: #f8f1e9;
         }
         body {
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
@@ -60,19 +59,18 @@
             background: #ff8c5a;
             transform: translateY(-2px);
         }
-        /* Mobile menu */
+        /* Mobile menu animation */
         #mobile-menu {
             animation: fadeIn 0.3s ease forwards;
         }
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* Extra breathing room on mobile */
         @media (max-width: 768px) {
             section {
-                padding-top: 4.5rem !important;
-                padding-bottom: 4.5rem !important;
+                padding-top: 5rem !important;
+                padding-bottom: 5rem !important;
             }
             .section-divider {
                 height: 1px;
@@ -87,7 +85,7 @@
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <!-- FIXED NAV – MOBILE OPTIMIZED -->
+    <!-- FIXED NAV – HAMBURGER NOW FULLY WORKING -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <!-- Logo -->
@@ -105,10 +103,11 @@
                 <a href="#roi" class="hover:text-white transition-colors">ROI</a>
             </div>
 
-            <!-- Mobile Tagline (shortened) + Hamburger -->
+            <!-- Mobile Tagline (short) + Hamburger -->
             <div class="flex items-center gap-4">
-                <div class="hidden sm:block text-[10px] uppercase bg-gray-900 text-gray-400 px-3 py-1 rounded">Time has moved on</div>
-                <button id="mobile-menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
+                <div class="hidden sm:block text-[10px] uppercase bg-gray-900 text-gray-400 px-3 py-1 rounded">Time has moved o, have your meetings?n</div>
+                <button id="mobile-menu-btn" 
+                        class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5 focus:outline-none">
                     <span class="block w-6 h-px bg-white transition-all"></span>
                     <span class="block w-6 h-px bg-white transition-all"></span>
                     <span class="block w-6 h-px bg-white transition-all"></span>
@@ -118,7 +117,8 @@
 
         <!-- MOBILE FULL-SCREEN MENU -->
         <div id="mobile-menu" class="hidden fixed inset-0 bg-black z-[60] flex flex-col items-center justify-center gap-10 text-3xl font-light">
-            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-5xl text-gray-400">✕</button>
+            <button onclick="toggleMobileMenu()" 
+                    class="absolute top-8 right-8 text-5xl text-gray-400">✕</button>
             <a href="#problem" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">The Problem</a>
             <a href="#shift" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">The Shift</a>
             <a href="#lifecycle" onclick="toggleMobileMenu()" class="hover:text-[#f5c94c]">Lifecycle</a>
@@ -374,20 +374,29 @@
     </section>
 
     <script>
+        // HAMBURGER MENU – NOW FIXED AND WORKING
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        // Close mobile menu on outside click or escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const menu = document.getElementById('mobile-menu');
-                if (!menu.classList.contains('hidden')) menu.classList.add('hidden');
+        // Attach click handler to hamburger button
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('mobile-menu-btn');
+            if (hamburgerBtn) {
+                hamburgerBtn.addEventListener('click', toggleMobileMenu);
             }
         });
 
-        // Auto-close mobile menu when clicking a link (already handled in onclick)
+        // Close menu with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                }
+            }
+        });
     </script>
 </body>
 </html>
